@@ -33,8 +33,9 @@
 		if (!precision) return Math.round(n);
 		
 		let p = Math.pow(10, precision);
-		n *= p; n += 0.5; n = Math.floor(n);
-		return n /= p;
+		let m = [x => x * p, x => x + 0.5, x => Math.floor(x), x => x / p];
+		n = m.reduce((x, f) => f(x), n);
+		return n;
 	};
 	
 	let trunc = n => n < 0 ? Math.ceil(n) : Math.floor(n);
