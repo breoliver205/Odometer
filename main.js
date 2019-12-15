@@ -68,7 +68,7 @@
 
 			let value;
 			this.value = this.sanitize((value = this.options.value) !== null ? value : "");
-
+			this.renderInside();
 			this.render();
 			try {
 				let content = ["innerHTML", "innerText", "textContent"];
@@ -202,7 +202,7 @@
 					}
 				}
 			} else {
-				let wholePart = !this.format.precision || !this.fractionalPart(value) || false;
+				let wholePart = !this.format.precision || !fpart(value) || false;
 				let ref1 = value.toString().split("").reverse();
 
 				for (let j = 0, l = ref1.length; j < l; j++){
@@ -458,8 +458,8 @@
 			for (let i = 0, len = elements.length; i < len; i++){
 				let element = elements[i], ref;
 				results.push(element.odometer = new Odometer({
-					el: el,
-					value: (ref = el.innerText) !== null ? ref : el.textContent
+					el: element,
+					value: (ref = element.innerText) !== null ? ref : element.textContent
 				}));
 			}
 
